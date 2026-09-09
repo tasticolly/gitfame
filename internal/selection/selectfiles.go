@@ -1,7 +1,7 @@
 package selection
 
 import (
-	"github.com/tasticolly/git-stats/internal/config"
+	"github.com/tasticolly/gitfame/internal/config"
 	"path"
 	"path/filepath"
 )

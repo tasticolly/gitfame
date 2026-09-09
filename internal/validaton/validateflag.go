@@ -3,8 +3,8 @@ package validaton
 import (
 	"errors"
 	"fmt"
-	"github.com/tasticolly/git-stats/internal/config"
-	"github.com/tasticolly/git-stats/internal/git"
+	"github.com/tasticolly/gitfame/internal/config"
+	"github.com/tasticolly/gitfame/internal/git"
 	"os"
 	"path"
 )

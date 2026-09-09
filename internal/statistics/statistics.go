@@ -1,7 +1,7 @@
 package statistics
 
 import (
-	"github.com/tasticolly/git-stats/internal/git"
+	"github.com/tasticolly/gitfame/internal/git"
 )
 
 type EntityFrame struct {

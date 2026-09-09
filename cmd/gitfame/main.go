@@ -1,15 +1,13 @@
-//go:build !solution
-
 package main
 
 import (
 	"fmt"
 	flag "github.com/spf13/pflag"
-	"github.com/tasticolly/git-stats/internal/git"
-	"github.com/tasticolly/git-stats/internal/out"
-	"github.com/tasticolly/git-stats/internal/selection"
-	"github.com/tasticolly/git-stats/internal/statistics"
-	"github.com/tasticolly/git-stats/internal/validaton"
+	"github.com/tasticolly/gitfame/internal/git"
+	"github.com/tasticolly/gitfame/internal/out"
+	"github.com/tasticolly/gitfame/internal/selection"
+	"github.com/tasticolly/gitfame/internal/statistics"
+	"github.com/tasticolly/gitfame/internal/validaton"
 	"os"
 	"sync/atomic"
 	"time"

@@ -1,9 +1,9 @@
 package out
 
 import (
-	"github.com/tasticolly/git-stats/internal/out/preprocess"
-	"github.com/tasticolly/git-stats/internal/out/writers"
-	"github.com/tasticolly/git-stats/internal/statistics"
+	"github.com/tasticolly/gitfame/internal/out/preprocess"
+	"github.com/tasticolly/gitfame/internal/out/writers"
+	"github.com/tasticolly/gitfame/internal/statistics"
 )
 
 func WriteResult(data []statistics.EntityFrame, format, orderBy string) error {

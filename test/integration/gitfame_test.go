@@ -2,7 +2,7 @@ package integration
 
 import (
 	"bytes"
-	"github.com/tasticolly/git-stats/test/testtool"
+	"github.com/tasticolly/gitfame/test/testtool"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -14,7 +14,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-const importPath = "github.com/tasticolly/git-stats/cmd/gitfame"
+const importPath = "github.com/tasticolly/gitfame/cmd/gitfame"
 
 var binCache testtool.BinCache
 

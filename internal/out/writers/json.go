@@ -3,7 +3,7 @@ package writers
 import (
 	"encoding/json"
 	"github.com/pkg/errors"
-	"github.com/tasticolly/git-stats/internal/statistics"
+	"github.com/tasticolly/gitfame/internal/statistics"
 	"io"
 	"os"
 )

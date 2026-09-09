@@ -1,7 +1,7 @@
 package preprocess
 
 import (
-	"github.com/tasticolly/git-stats/internal/statistics"
+	"github.com/tasticolly/gitfame/internal/statistics"
 	"sort"
 	"strings"
 )

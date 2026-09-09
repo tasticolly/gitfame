@@ -2,7 +2,7 @@ package writers
 
 import (
 	"fmt"
-	"github.com/tasticolly/git-stats/internal/statistics"
+	"github.com/tasticolly/gitfame/internal/statistics"
 	"os"
 	"text/tabwriter"
 )

@@ -2,7 +2,7 @@ package writers
 
 import (
 	"encoding/csv"
-	"github.com/tasticolly/git-stats/internal/statistics"
+	"github.com/tasticolly/gitfame/internal/statistics"
 	"os"
 	"strconv"
 )
