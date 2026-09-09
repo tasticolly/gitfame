@@ -21,13 +21,11 @@ func (tw *TabularWriter) WriteFrames(data []statistics.EntityFrame) error {
 		return err
 	}
 	for _, entity := range data {
-		outString := fmt.Sprintf("%s\t%d\t%d\t%d\n", entity.PersonName, entity.LinesCount, entity.CommitsCount, entity.FilesCount)
-		fmt.Fprint(tw.writer, outString)
+		_, err = fmt.Fprintf(tw.writer, "%s\t%d\t%d\t%d\n",
+			entity.PersonName, entity.LinesCount, entity.CommitsCount, entity.FilesCount)
+		if err != nil {
+			return err
+		}
 	}
-	err = tw.writer.Flush()
-
-	if err != nil {
-		return err
-	}
-	return nil
+	return tw.writer.Flush()
 }

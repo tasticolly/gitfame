@@ -1,0 +1,23 @@
+version: "2"
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - misspell
+    - revive
+
+  exclusions:
+    rules:
+      # These packages are internal/, so a doc comment on every exported name
+      # documents nothing anyone can call. Comments live where the code alone
+      # does not explain the decision.
+      - linters: [revive]
+        text: "^(exported|package-comments):"
+
+formatters:
+  enable:
+    - gofmt
