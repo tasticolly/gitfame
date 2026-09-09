@@ -1,6 +1,7 @@
 package validaton
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"github.com/tasticolly/gitfame/internal/config"
@@ -10,6 +11,7 @@ import (
 )
 
 func Flags(
+	ctx context.Context,
 	repositoryFlag, revisionFlag, orderFlag, formatFlag string,
 	extensionsFlag, languagesFlag, excludeFlag, restrictToFlag []string,
 ) error {
@@ -18,7 +20,7 @@ func Flags(
 		return err
 	}
 
-	err = validateRevision(repositoryFlag, revisionFlag)
+	err = validateRevision(ctx, repositoryFlag, revisionFlag)
 	if err != nil {
 		return err
 	}
@@ -79,8 +81,8 @@ func validateRepository(repositoryPath string) error {
 	return nil
 }
 
-func validateRevision(repository, revision string) error {
-	ok := git.IsRevisionExists(repository, revision)
+func validateRevision(ctx context.Context, repository, revision string) error {
+	ok := git.IsRevisionExists(ctx, repository, revision)
 	if !ok {
 		return errors.New("git revision does not exists: " + revision)
 	}

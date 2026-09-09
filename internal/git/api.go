@@ -1,6 +1,7 @@
 package git
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"os"
@@ -15,8 +16,8 @@ type CommitInfo struct {
 	NumOfLines int
 }
 
-func GetFileNames(repository, revision string) ([]string, error) {
-	cmd := exec.Command("git", "ls-tree", "-r", "--name-only", revision)
+func GetFileNames(ctx context.Context, repository, revision string) ([]string, error) {
+	cmd := exec.CommandContext(ctx, "git", "ls-tree", "-r", "--name-only", revision)
 	cmd.Dir = repository
 	out, err := cmd.Output()
 	if err != nil {
@@ -30,8 +31,8 @@ func GetFileNames(repository, revision string) ([]string, error) {
 	return strings.Split(fileNames, "\n"), nil
 }
 
-func IsRevisionExists(repository, revision string) bool {
-	cmd := exec.Command("git", "cat-file", "-e", revision)
+func IsRevisionExists(ctx context.Context, repository, revision string) bool {
+	cmd := exec.CommandContext(ctx, "git", "cat-file", "-e", revision)
 	cmd.Dir = repository
 	_ = cmd.Start()
 	if err := cmd.Wait(); err != nil {
@@ -40,13 +41,13 @@ func IsRevisionExists(repository, revision string) bool {
 	return true
 }
 
-func lastChangePerson(repository, revision, filename string, useCommitter bool) ([]string, error) {
+func lastChangePerson(ctx context.Context, repository, revision, filename string, useCommitter bool) ([]string, error) {
 	personFormat := "%an"
 	if useCommitter {
 		personFormat = "%cn"
 	}
 	prettyFormat := fmt.Sprintf("--pretty='%s%%n%%H'", personFormat)
-	cmd := exec.Command("git", "log", "-n1", prettyFormat, revision, "--", filename)
+	cmd := exec.CommandContext(ctx, "git", "log", "-n1", prettyFormat, revision, "--", filename)
 	cmd.Dir = repository
 	out, err := cmd.Output()
 	if err != nil {
@@ -55,9 +56,8 @@ func lastChangePerson(repository, revision, filename string, useCommitter bool) 
 	return strings.Split(string(out)[1:len(out)-2], "\n"), nil
 }
 
-func GetInfo(repository, revision, filename string, useCommitter bool) (map[string]*CommitInfo, error) {
-
-	cmd := exec.Command("git", "blame", "--incremental", revision, filename)
+func GetInfo(ctx context.Context, repository, revision, filename string, useCommitter bool) (map[string]*CommitInfo, error) {
+	cmd := exec.CommandContext(ctx, "git", "blame", "--incremental", revision, filename)
 	cmd.Dir = repository
 
 	out, err := cmd.Output()
@@ -67,7 +67,7 @@ func GetInfo(repository, revision, filename string, useCommitter bool) (map[stri
 	}
 
 	if len(out) == 0 {
-		personAndHash, err := lastChangePerson(repository, revision, filename, useCommitter)
+		personAndHash, err := lastChangePerson(ctx, repository, revision, filename, useCommitter)
 		if err != nil {
 			return nil, err
 		}
